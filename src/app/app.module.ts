@@ -16,12 +16,16 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { ProjectsComponent } from './projects/projects.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { PoListComponent } from './po-list/po-list.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    PoListComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

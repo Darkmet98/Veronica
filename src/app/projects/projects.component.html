@@ -1,23 +1,10 @@
 <h1>Projects</h1>
 
-<mat-card (click)="GoTo('/')">
-  <mat-card-content>
-    <mat-card-title>Persona 4</mat-card-title>
-    <mat-card-subtitle>La tradu to flama de glow</mat-card-subtitle>
-  </mat-card-content>
-</mat-card>
-
-<mat-card (click)="GoTo('/')">
-  <mat-card-title>Shin Megami Tensei: Nocturne</mat-card-title>
-  <mat-card-subtitle>El siguiente proyecto de HyperTraducciones</mat-card-subtitle>
-</mat-card>
-
-<mat-card (click)="GoTo('/')">
-  <mat-card-title>Fairy Fencer F: Advent Dark Force</mat-card-title>
-  <mat-card-subtitle>El otro proyecto de HyperTraducciones</mat-card-subtitle>
-</mat-card>
-
-<mat-card (click)="GoTo('/')">
-  <mat-card-title>Persona 1</mat-card-title>
-  <mat-card-subtitle>El más aclamado proyecto de Amala liderado por Darko bueno</mat-card-subtitle>
-</mat-card>
+<div *ngFor="let project of projects">
+  <mat-card (click)="GoTo(project.id)">
+    <mat-card-content>
+      <mat-card-title>{{project.name}}</mat-card-title>
+      <mat-card-subtitle>{{project.description}}</mat-card-subtitle>
+    </mat-card-content>
+  </mat-card>
+</div>
