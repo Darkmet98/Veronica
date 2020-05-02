@@ -1,3 +1,7 @@
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+  height: 100%;
+}
+
 mat-sidenav {
   width: 250px;
 }
@@ -21,12 +25,12 @@ a:active {
 
 .icon {
   display: inline-block;
-  height: 30px;
+  height: 4vh;
   margin: 0 auto;
-  padding-right: 5px;
+  padding-right: 2vh;
   text-align: center;
   vertical-align: middle;
-  width: 15%;
+  width: 2vh;
 }
 
 .label {
@@ -34,4 +38,8 @@ a:active {
   line-height: 30px;
   margin: 0;
   width: 85%;
+}
+
+router-outlet {
+  margin: 5vh;
 }

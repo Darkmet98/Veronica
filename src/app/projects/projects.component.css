@@ -1,0 +1,9 @@
+mat-card {
+  padding: 5vh;
+  margin: 3vh;
+  cursor: pointer;
+}
+
+h1 {
+  text-align: center;
+}
