@@ -47,6 +47,6 @@ export class PoListComponent implements OnInit {
 
 
   public GoTo(link) {
-    this.router.navigateByUrl(link);
+    this.router.navigateByUrl('/projects/' + this.id + '/' + link);
   }
 }

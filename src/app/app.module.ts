@@ -15,17 +15,21 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { ProjectsComponent } from './projects/projects.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PoListComponent } from './po-list/po-list.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { EntryEditorComponent } from './entry-editor/entry-editor.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ProjectsComponent,
-    PoListComponent
+    PoListComponent,
+    EntryEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +47,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    FlexLayoutModule,
+    MatPaginatorModule,
+    FormsModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,58 @@
+mat-card {
+  margin: 2vh;
+}
+
+#Translator {
+
+}
+
+.GoToButton {
+  margin-left: 5vh;
+}
+
+button {
+  border: white 1px solid;
+}
+
+#Visualization {
+  min-height: 40%;
+  height: 40%;
+  position: relative;
+}
+
+#Text {
+  position: absolute;
+  top: 12vh;
+  left: 10vh;
+  font-size: 5vh;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+.mat-paginator-container {
+  justify-content: center !important;
+}
+
+mat-card-actions {
+  margin-left: 1vh;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 0 8px;
+  flex-wrap: wrap-reverse;
+  width: 100%;
+}
+
+h2, h3 {
+  line-height: 1;
+}

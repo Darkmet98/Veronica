@@ -1,0 +1,71 @@
+<h1>PERSONA 4 \ P00-1</h1>
+
+<div fxLayout="row" fxLayout.xs="column" fxFlexFill>
+
+  <div fxFlex="60" fxFlex.xs="100">
+    <mat-card id="Translator">
+
+      <mat-card-title>
+        <div id="Visualization">
+          <img src="https://i.ya-webdesign.com/images/text-background-png-1.png" style="width:100%;height:auto">
+          <div id="Text">
+            <span style="top: 50px;left:50px" id="RenderizedText"></span>
+          </div>
+        </div>
+      </mat-card-title>
+      <mat-card-content>
+        <form class="example-form" [formGroup]="">
+          <mat-form-field class="example-full-width">
+            <mat-label>Original</mat-label>
+            <input matInput disabled value="Sushi">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Translated</mat-label>
+            <textarea matInput id="TranslatedText" (keyup)="UpdateText($event)"></textarea>
+          </mat-form-field>
+        </form>
+
+        <mat-card-actions>
+          <button mat-button>
+            <mat-icon>save</mat-icon>
+            SAVE
+          </button>
+          <button mat-button>
+            <mat-icon>double_arrow</mat-icon>
+            SKIP
+          </button>
+          <mat-slide-toggle>Need revision</mat-slide-toggle>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="30" fxFlex.xs="100">
+
+    <mat-card id="Index">
+      <mat-paginator [length]="50"
+                     [pageSize]="1">
+      </mat-paginator>
+      <div class="container">
+        <mat-form-field>
+          <input matInput placeholder="Go to entry...">
+        </mat-form-field>
+        <button mat-stroked-button class="GoToButton">Go</button>
+      </div>
+    </mat-card>
+
+    <mat-card id="Context">
+      <h2>Context</h2>
+      <h3>Hola</h3>
+      <h2>Reference</h2>
+      <h3>Hola</h3>
+      <h2>Tags</h2>
+      <h3>Hola</h3>
+      <h2>Extracted Comments</h2>
+      <h3>Hola</h3>
+      <h2>Translator Cometary</h2>
+      <h3>Hola</h3>
+    </mat-card>
+  </div>
+
+</div>
