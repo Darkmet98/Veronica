@@ -1,4 +1,8 @@
-<h1>PERSONA 4 \ P00-1</h1>
+
+<div class="containerHeader">
+  <button mat-flat-button color="primary" (click)="Return()">Return</button>
+  <span>PERSONA 4 \ P00-1</span>
+</div>
 
 <div fxLayout="row" fxLayout.xs="column" fxFlexFill>
 
@@ -36,6 +40,10 @@
             SKIP
           </button>
           <mat-slide-toggle>Need revision</mat-slide-toggle>
+          <mat-chip-list>
+            <span>Count:</span>
+            <mat-chip color="primary" selected id="charaCount">0</mat-chip>
+          </mat-chip-list>
         </mat-card-actions>
       </mat-card-content>
     </mat-card>

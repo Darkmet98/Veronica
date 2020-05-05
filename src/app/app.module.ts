@@ -22,6 +22,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { EntryEditorComponent } from './entry-editor/entry-editor.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatPaginatorModule,
     FormsModule,
     MatSlideToggleModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

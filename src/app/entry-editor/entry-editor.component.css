@@ -31,16 +31,17 @@ button {
   width: 100%;
 }
 
-h1 {
-  text-align: center;
-}
-
 .mat-paginator-container {
   justify-content: center !important;
 }
 
 mat-card-actions {
-  margin-left: 1vh;
+  display: flex;
+  align-items: center;
+}
+
+mat-chip-list {
+  margin-left: auto;
 }
 
 .container {
@@ -51,6 +52,17 @@ mat-card-actions {
   padding: 0 8px;
   flex-wrap: wrap-reverse;
   width: 100%;
+}
+
+.containerHeader {
+  padding-left: 2vh;
+  display: flex;
+  align-items: center;
+
+}
+
+.containerHeader > button {
+  margin-right: 2vh;
 }
 
 h2, h3 {
