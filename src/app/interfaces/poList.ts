@@ -1,6 +1,6 @@
 export interface PoList {
-  id: number;
-  name: string;
-  status: string;
-  translated: number;
+  Id: number;
+  Name: string;
+  Status: string;
+  Translated: number;
 }

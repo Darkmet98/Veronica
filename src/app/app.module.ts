@@ -23,6 +23,7 @@ import { EntryEditorComponent } from './entry-editor/entry-editor.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatChipsModule} from '@angular/material/chips';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -53,8 +54,9 @@ import {MatChipsModule} from '@angular/material/chips';
     FormsModule,
     MatSlideToggleModule,
     MatChipsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

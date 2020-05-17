@@ -1,5 +1,7 @@
 export interface Project {
-  id: string;
-  name: string;
-  description: string;
+  Id: number;
+  Name: string;
+  Description: string;
+  Repository: string;
+  Branch: string;
 }

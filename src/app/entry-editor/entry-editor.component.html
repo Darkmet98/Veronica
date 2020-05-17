@@ -1,7 +1,7 @@
 
 <div class="containerHeader">
   <button mat-flat-button color="primary" (click)="Return()">Return</button>
-  <span>PERSONA 4 \ P00-1</span>
+  <span>{{entry.Project}} \ {{entry.File}}</span>
 </div>
 
 <div fxLayout="row" fxLayout.xs="column" fxFlexFill>
@@ -13,7 +13,9 @@
         <div id="Visualization">
           <img src="https://i.ya-webdesign.com/images/text-background-png-1.png" style="width:100%;height:auto">
           <div id="Text">
-            <span style="top: 50px;left:50px" id="RenderizedText"></span>
+            <span style="top: 50px;left:50px" id="RenderizedText">
+              {{entry.Translated == "" ? entry.Original : entry.Translated}}
+            </span>
           </div>
         </div>
       </mat-card-title>
@@ -21,12 +23,12 @@
         <form class="example-form" [formGroup]="">
           <mat-form-field class="example-full-width">
             <mat-label>Original</mat-label>
-            <input matInput disabled value="Sushi">
+            <input matInput disabled value="{{entry.Original}}">
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>Translated</mat-label>
-            <textarea matInput id="TranslatedText" (keyup)="UpdateText($event)"></textarea>
+            <textarea matInput id="TranslatedText" (keyup)="UpdateText()">{{entry.Translated}}</textarea>
           </mat-form-field>
         </form>
 
@@ -51,8 +53,10 @@
   <div fxFlex="30" fxFlex.xs="100">
 
     <mat-card id="Index">
-      <mat-paginator [length]="50"
-                     [pageSize]="1">
+      <mat-paginator [length]="entry.Size"
+                     [pageIndex]="entry.Index"
+                     [pageSize]="1"
+                     (page)="pageEvent = ChangeEntry($event)">
       </mat-paginator>
       <div class="container">
         <mat-form-field>
@@ -64,15 +68,7 @@
 
     <mat-card id="Context">
       <h2>Context</h2>
-      <h3>Hola</h3>
-      <h2>Reference</h2>
-      <h3>Hola</h3>
-      <h2>Tags</h2>
-      <h3>Hola</h3>
-      <h2>Extracted Comments</h2>
-      <h3>Hola</h3>
-      <h2>Translator Cometary</h2>
-      <h3>Hola</h3>
+      <h3>{{entry.Context}}</h3>
     </mat-card>
   </div>
 

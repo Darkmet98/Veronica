@@ -1,6 +1,7 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PoList} from '../interfaces/poList';
+import {DataService} from "../data.service";
 
 @Component({
   selector: 'app-po-list',
@@ -11,7 +12,7 @@ import {PoList} from '../interfaces/poList';
 @Injectable()
 export class PoListComponent implements OnInit {
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private dataService: DataService) { }
 
   id: string;
   poLists: PoList[];
@@ -22,27 +23,9 @@ export class PoListComponent implements OnInit {
       this.id = params.id;
     });
 
-    switch (this.id) {
-      case 'Persona_4':
-        this.poLists = [
-          {id: 1, name: 'P00-1', status: 'Incomplete', translated: 40},
-          {id: 2, name: 'P00-2', status: 'Incomplete', translated: 70},
-          {id: 3, name: 'P00-3', status: 'Complete', translated: 100},
-          {id: 4, name: 'P00-4', status: 'Not started', translated: 0},
-        ];
-        break;
-      case 'smt_nocturne':
-        this.poLists = [
-          {id: 1, name: 'NC-1', status: 'Incomplete', translated: 40},
-          {id: 2, name: 'NC-2', status: 'Complete', translated: 100},
-        ];
-        break;
-      default:
-        this.poLists = [
-          {id: 1, name: 'Generic', status: 'Incomplete', translated: 40},
-        ];
-        break;
-    }
+    this.dataService.sendGetRequest("/pofile/json/get/"+this.id).subscribe((data: any[])=> {
+      this.poLists = data;
+    });
   }
 
 

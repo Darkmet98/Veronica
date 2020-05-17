@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Project} from '../interfaces/project';
+import {DataService} from "../data.service";
 
 @Component({
   selector: 'app-projects',
@@ -9,17 +10,15 @@ import {Project} from '../interfaces/project';
 })
 
 export class ProjectsComponent implements OnInit {
+  projects: Project[];
 
-  projects: Project[] = [
-    {id: 'Persona_4', name: 'Persona 4', description: 'La tradu to flama de glow'},
-    {id: 'smt_nocturne', name: 'Shin Megami Tensei: Nocturne', description: 'El siguiente proyecto de HyperTraducciones'},
-    {id: 'FFF_ADV', name: 'Fairy Fencer F: Advent Dark Force', description: 'El otro proyecto de HyperTraducciones'},
-    {id: 'Persona_1', name: 'Persona 1', description: 'El más aclamado proyecto de Amala liderado por Darko bueno'},
-  ];
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.dataService.sendGetRequest("/projects/json/get").subscribe((data: any[])=> {
+      this.projects = data;
+    });
   }
 
   public GoTo(id) {
