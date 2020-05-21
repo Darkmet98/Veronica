@@ -1,7 +1,7 @@
+import {Entry} from "./Entry";
+
 export interface PoEntry {
-  Context: string;
-  Original: string;
-  Translated: string;
+  Entry: Entry;
   Project: string;
   File: string;
   Size: number;

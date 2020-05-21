@@ -24,6 +24,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatChipsModule} from '@angular/material/chips';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {AutosizeModule} from 'ngx-autosize';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     MatSlideToggleModule,
     MatChipsModule,
     HttpClientModule,
+    AutosizeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

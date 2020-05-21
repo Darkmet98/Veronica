@@ -11,14 +11,6 @@ import {PageEvent} from "@angular/material/paginator";
 })
 export class EntryEditorComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private dataService: DataService) {
-  }
-  id: string;
-  idEntry: string;
-  entry: PoEntry;
-  private sub: any;
-  pageEvent: PageEvent;
-
-  ngOnInit(): void {
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.id = params["id"];
       this.idEntry = params["po"];
@@ -27,25 +19,67 @@ export class EntryEditorComponent implements OnInit {
     this.dataService.sendGetRequest("/pofile/json/get/"+this.id+"/"+this.idEntry).subscribe((data: any[])=> {
       // @ts-ignore
       this.entry = data;
+      this.entryCount = this.entry.Index
     });
-    this.UpdateText();
+  }
+  id: string;
+  idEntry: string;
+  entryCount: number;
+  entry: PoEntry;
+  private sub: any;
+  pageEvent: PageEvent;
+
+  ngOnInit(): void {
+    this.pageEvent = new PageEvent();
   }
 
-  public UpdateText() {
-    document.getElementById('RenderizedText').innerText = (this.entry.Translated=="")?this.entry.Original:this.entry.Translated;
-    document.getElementById('charaCount').innerText = this.entry.Translated.length.toString();
+  public UpdateText(translated:string) {
+    document.getElementById('charaCount').innerText = translated.length.toString();
   }
 
   public Return() {
     this.router.navigateByUrl('/projects/' + this.id);
   }
 
-  public ChangeEntry(event?:PageEvent){
-    this.dataService.sendGetRequest("/pofile/json/get/"+this.id+"/"+this.idEntry+"/"+event.pageIndex).subscribe((data: any[])=> {
+  public ChangeIndex(event?:PageEvent){
+    this.entryCount = event.pageIndex;
+    this.ChangeEntry();
+    return event;
+  }
+
+  private ChangeEntry(){
+    this.dataService.sendGetRequest("/pofile/json/get/"+this.id+"/"+this.idEntry+"/"+ this.entryCount).subscribe((data: any[])=> {
+      (<HTMLInputElement>document.getElementById('translatedText')).value = "";
       // @ts-ignore
       this.entry = data;
     });
-    this.UpdateText();
-    return event;
+  }
+
+  public NextEntry(){
+    this.entryCount++;
+    this.pageEvent.pageIndex++;
+    this.ChangeEntry();
+  }
+
+  public GoToEntry(position:string){
+    const pos = Number(position) - 1;
+    if(isNaN(pos))
+      return;
+    if(pos+1 <= this.entry.Size && pos >= 0){
+      this.entryCount = pos;
+      this.pageEvent.pageIndex = pos;
+      this.ChangeEntry();
+    }
+  }
+
+  public UpdateEntry(translated:string){
+
+    const entry = {
+      translation : translated,
+      position : this.entryCount,
+      id : this.idEntry
+    }
+    this.dataService.sendData("/pofile/json/set", entry);
+    this.NextEntry();
   }
 }
