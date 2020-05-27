@@ -23,8 +23,9 @@ import { EntryEditorComponent } from './entry-editor/entry-editor.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatChipsModule} from '@angular/material/chips';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {AutosizeModule} from 'ngx-autosize';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import {AutosizeModule} from 'ngx-autosize';
     MatSlideToggleModule,
     MatChipsModule,
     HttpClientModule,
-    AutosizeModule
+    AutosizeModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
