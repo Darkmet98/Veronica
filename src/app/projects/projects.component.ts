@@ -16,7 +16,10 @@ export class ProjectsComponent implements OnInit {
   constructor(public router: Router, private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.dataService.sendGetRequest("/projects/json/get").subscribe((data: any[])=> {
+    const json = {
+      id: JSON.parse(localStorage.getItem("user")).Id
+    };
+    this.dataService.sendPostRequest("/api/projects", json).subscribe((data: any[])=> {
       this.projects = data;
     });
   }

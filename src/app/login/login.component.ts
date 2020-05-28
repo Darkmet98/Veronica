@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {DataService} from "../data.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {User} from "../interfaces/User";
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  user: User;
   @Input() error: string | null;
   @Output() submitEM = new EventEmitter();
 
@@ -28,7 +30,12 @@ export class LoginComponent implements OnInit {
       this.dataService.login(this.form.value).subscribe({
         error: () => this.openSnackBar("El usuario o contraseña es incorrecto."),
         next: value => {
-          console.log(value["token"]);
+          this.user = {
+            Token: value["token"],
+            Name: value["data"]["user"],
+            Id: value["data"]["id"]
+          }
+          localStorage.setItem("user", JSON.stringify(this.user));
           this.openSnackBar("Has iniciado sesión.");
         }
       })

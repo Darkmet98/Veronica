@@ -8,20 +8,30 @@ export class DataService {
   private REST_API_SERVER = "http://localhost";
   constructor(private httpClient: HttpClient) { }
 
-  private headers= new HttpHeaders()
-    .set('content-type', 'application/json');
-
   public sendGetRequest(url){
-    return this.httpClient.get(this.REST_API_SERVER + url, { 'headers': this.headers });
+    return this.httpClient.get(this.REST_API_SERVER + url, { 'headers': this.getToken(true) });
+  }
+
+  public sendPostRequest(url, json){
+    return this.httpClient.post(this.REST_API_SERVER + url,json, { 'headers': this.getToken(true) });
   }
 
   public sendData(url:string, json){
-    this.httpClient.put(this.REST_API_SERVER + url, json, { 'headers': this.headers }).subscribe({
+    this.httpClient.put(this.REST_API_SERVER + url, json, { 'headers': this.getToken(true) }).subscribe({
       error: error => console.error('There was an error!', error)
     })
   }
 
   public login(json){
-    return this.httpClient.post(this.REST_API_SERVER + "/api/login_check", json, { 'headers': this.headers })
+    return this.httpClient.post(this.REST_API_SERVER + "/api/login_check", json, { 'headers': this.getToken() })
+  }
+
+  private getToken(login:boolean=false){
+    if(login){
+      const token = JSON.parse(localStorage.getItem("user")).Token;
+      return new HttpHeaders().set('content-type', 'application/json').set("authorization", "Bearer "+token)
+    }
+
+    return new HttpHeaders().set('content-type', 'application/json');
   }
 }
