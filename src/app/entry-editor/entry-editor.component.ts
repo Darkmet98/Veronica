@@ -16,7 +16,7 @@ export class EntryEditorComponent implements OnInit {
       this.idEntry = params["po"];
     });
 
-    this.dataService.sendGetRequest("/pofile/json/get/"+this.id+"/"+this.idEntry).subscribe((data: any[])=> {
+    this.dataService.sendGetRequest("/api/entries/"+this.id+"/"+this.idEntry).subscribe((data: any[])=> {
       // @ts-ignore
       this.entry = data;
       this.entryCount = this.entry.Index
@@ -48,7 +48,7 @@ export class EntryEditorComponent implements OnInit {
   }
 
   private ChangeEntry(){
-    this.dataService.sendGetRequest("/pofile/json/get/"+this.id+"/"+this.idEntry+"/"+ this.entryCount).subscribe((data: any[])=> {
+    this.dataService.sendGetRequest("/api/entries/"+this.id+"/"+this.idEntry+"/"+ this.entryCount).subscribe((data: any[])=> {
       (<HTMLInputElement>document.getElementById('translatedText')).value = "";
       // @ts-ignore
       this.entry = data;
@@ -79,7 +79,7 @@ export class EntryEditorComponent implements OnInit {
       position : this.entryCount,
       id : this.idEntry
     }
-    this.dataService.sendData("/pofile/json/set", entry);
+    this.dataService.sendData("/api/entries/set", entry);
     this.NextEntry();
   }
 }

@@ -23,7 +23,7 @@ export class PoListComponent implements OnInit {
       this.id = params.id;
     });
 
-    this.dataService.sendGetRequest("/pofile/json/get/"+this.id).subscribe((data: any[])=> {
+    this.dataService.sendGetRequest("/api/entries/"+this.id).subscribe((data: any[])=> {
       this.poLists = data;
     });
   }
