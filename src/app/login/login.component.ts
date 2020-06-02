@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {DataService} from "../data.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {User} from "../interfaces/User";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import {User} from "../interfaces/User";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private dataService: DataService, private _snackBar: MatSnackBar) { }
+  constructor(private dataService: DataService, private _snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
           }
           localStorage.setItem("user", JSON.stringify(this.user));
           this.openSnackBar("Has iniciado sesión.");
+          this.router.navigateByUrl("/projects");
         }
       })
     }
