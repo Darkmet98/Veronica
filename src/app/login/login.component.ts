@@ -4,17 +4,19 @@ import {DataService} from "../data.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {User} from "../interfaces/User";
 import {Router} from "@angular/router";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private dataService: DataService, private _snackBar: MatSnackBar, private router: Router) { }
+  constructor(private dataService: DataService, private _snackBar: MatSnackBar, private router: Router, private appComponent : AppComponent) { }
 
   ngOnInit(): void {
+    this.appComponent.CheckLogin();
   }
 
   user: User;

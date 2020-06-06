@@ -23,9 +23,11 @@ import { EntryEditorComponent } from './entry-editor/entry-editor.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatChipsModule} from '@angular/material/chips';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AutosizeModule} from 'ngx-autosize';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatMenuModule} from "@angular/material/menu";
+import {HttpErrorInterceptor} from "./http-error.interceptor";
 
 @NgModule({
   declarations: [
@@ -58,9 +60,16 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatChipsModule,
     HttpClientModule,
     AutosizeModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

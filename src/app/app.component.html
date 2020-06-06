@@ -3,16 +3,25 @@
 <mat-sidenav-container>
   <mat-sidenav  #sidenav role="navigation">
     <mat-nav-list>
+      <div *ngIf="isLogged">
+        <a mat-list-item
+            type="button">
+          <mat-icon class="icon">input</mat-icon>
+          <span class="label">{{user}}</span>
+        </a>
+      </div>
       <a mat-list-item
          routerLink="/projects">
         <mat-icon class="icon">dashboard</mat-icon>
         <span class="label">Dashboard</span>
       </a>
-      <a  mat-list-item
-          type="button">
-        <mat-icon class="icon">input</mat-icon>
-        <span class="label">Login</span>
-      </a>
+      <div *ngIf="isLogged">
+        <a  mat-list-item
+            type="button">
+          <mat-icon class="icon">input</mat-icon>
+          <span class="label">Logout</span>
+        </a>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -23,26 +32,36 @@
         </button>
       </div>
       <div>
-        <a routerLink="/">
-          Veronica
-        </a>
+          <div class="navbar-brand">
+            <a class="navbar-item" routerLink="/projects">
+              <img src="assets/images/logo.png" style="height: 5vh; padding-top: 1vh;">
+            </a>
+          </div>
       </div>
       <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs>
-        <ul fxLayout fxLayoutGap="20px" class="navigation-items">
-          <li>
-            <a
-              routerLink="/projects">
-              <mat-icon class="icon">dashboard</mat-icon>
-              <span class="label">Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a>
-              <mat-icon class="icon">input</mat-icon>
-              <span class="label">Login</span>
-            </a>
-          </li>
-        </ul>
+        <div *ngIf="isLogged">
+          <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+              <li>
+                <a routerLink="/projects" class="mat-icon-button">
+                  <mat-icon class="icon">dashboard</mat-icon>
+                </a>
+              </li>
+              <li>
+                  <button class="mat-icon-button" [matMenuTriggerFor]="menu">
+                    <mat-icon class="icon">person</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu" [overlapTrigger]="false">
+                    <button mat-menu-item>
+                      <span>Logged as: {{user}}</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>people_outline</mat-icon>
+                      <span>Close session</span>
+                    </button>
+                  </mat-menu>
+              </li>
+          </ul>
+        </div>
       </div>
     </mat-toolbar>
     <main>
