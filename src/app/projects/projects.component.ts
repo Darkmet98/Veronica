@@ -13,7 +13,7 @@ export class ProjectsComponent implements OnInit {
   projects: Project[];
 
 
-  constructor(public router: Router, private dataService: DataService) { }
+  constructor(public router: Router, public dataService: DataService) { }
 
   ngOnInit(): void {
     const json = {

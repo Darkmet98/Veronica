@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
   providedIn: 'root'
 })
 export class DataService {
-  private REST_API_SERVER = "http://192.168.100.6";
+  public REST_API_SERVER = "http://192.168.100.6";
   constructor(private httpClient: HttpClient) { }
 
   public sendGetRequest(url){

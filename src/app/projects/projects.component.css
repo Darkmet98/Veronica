@@ -1,7 +1,14 @@
 mat-card {
   padding: 5vh;
   margin: 3vh;
-  cursor: pointer;
+}
+
+.mat-card-avatar {
+  height: 10vh !important;
+  width: 10vh !important;
+}
+mat-card-title{
+  padding-top: 3vh;
 }
 
 h1 {
