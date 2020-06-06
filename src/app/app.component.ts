@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {DataService} from "./data.service";
 import {catchError, map} from "rxjs/operators";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-root',
@@ -14,14 +15,13 @@ export class AppComponent {
   isLogged : boolean;
   user : string;
 
-  constructor(private router: Router, private dataService: DataService) {
+  constructor(private router: Router, private dataService: DataService, private _snackBar: MatSnackBar) {
     this.CheckLogin();
 
   }
 
   public CheckLogin(){
     //Check if is logged
-    //TODO Refresh navbar when the user is logged
     this.dataService.sendGetRequest("/api/check").subscribe( (data: string)=> {
         console.log(data)
         if (data === "OK"){
@@ -39,5 +39,18 @@ export class AppComponent {
         this.router.navigateByUrl('/');
       }
     );
+  }
+
+  public Logout(){
+    localStorage.removeItem("user");
+    this.router.navigateByUrl('/');
+    this.isLogged = false;
+    this.openSnackBar("The session is closed...");
+  }
+
+  public openSnackBar(message: string) {
+    this._snackBar.open(message, "Ok", {
+      duration: 5000,
+    });
   }
 }

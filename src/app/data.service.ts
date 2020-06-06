@@ -28,8 +28,12 @@ export class DataService {
 
   private getToken(login:boolean=false){
     if(login){
-      const token = JSON.parse(localStorage.getItem("user")).Token;
-      return new HttpHeaders().set('content-type', 'application/json').set("authorization", "Bearer "+token)
+      const userObject = localStorage.getItem("user");
+      if (userObject != null){
+        const token = JSON.parse(userObject).Token;
+        return new HttpHeaders().set('content-type', 'application/json').set("authorization", "Bearer "+token)
+      }
+      return new HttpHeaders().set('content-type', 'application/json');
     }
 
     return new HttpHeaders().set('content-type', 'application/json');
