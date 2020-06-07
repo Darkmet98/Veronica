@@ -10,7 +10,7 @@ import {PageEvent} from "@angular/material/paginator";
   styleUrls: ['./entry-editor.component.css']
 })
 export class EntryEditorComponent implements OnInit {
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private dataService: DataService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, public dataService: DataService) {
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.id = params["id"];
       this.idEntry = params["po"];
@@ -22,10 +22,12 @@ export class EntryEditorComponent implements OnInit {
       this.entryCount = this.entry.Index
     });
   }
+
   id: string;
   idEntry: string;
   entryCount: number;
   entry: PoEntry;
+
   private sub: any;
   pageEvent: PageEvent;
 
@@ -35,6 +37,7 @@ export class EntryEditorComponent implements OnInit {
 
   public UpdateText(translated:string) {
     document.getElementById('charaCount').innerText = translated.length.toString();
+    document.getElementById('RenderizedText').innerText = translated;
   }
 
   public Return() {
@@ -48,10 +51,11 @@ export class EntryEditorComponent implements OnInit {
   }
 
   private ChangeEntry(){
-    this.dataService.sendGetRequest("/api/entries/"+this.id+"/"+this.idEntry+"/"+ this.entryCount).subscribe((data: any[])=> {
+    this.dataService.sendGetRequest("/api/entries/"+this.id+"/"+this.idEntry+"/"+ this.entryCount).subscribe((data: any)=> {
       (<HTMLInputElement>document.getElementById('translatedText')).value = "";
-      // @ts-ignore
       this.entry = data;
+      document.getElementById('charaCount').innerText = this.entry.CurrentEntry.Translated.length.toString();
+      document.getElementById('RenderizedText').innerText = this.entry.CurrentEntry.Translated == "" ? this.entry.CurrentEntry.Original : this.entry.CurrentEntry.Translated;
     });
   }
 

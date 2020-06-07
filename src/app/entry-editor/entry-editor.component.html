@@ -7,28 +7,33 @@
 <div fxLayout="row" fxLayout.xs="column" fxFlexFill *ngIf="entry">
 
   <div fxFlex="60" fxFlex.xs="100">
+    <div *ngIf="entry.Visualizator.ImageFile != 'NONE'">
+      <mat-card>
+        <h2>Previsualization</h2>
+          <mat-card-title>
+            <div id="Visualization">
+              <img [src]="dataService.REST_API_SERVER + '/images/dialogs/'+entry.Visualizator.ImageFile" style="width:100%;height:60%">
+              <div id="Text" [style]="'top:'+entry.Visualizator.TopPosition+'vh; left:' + entry.Visualizator.LeftPosition+'vw;'">
+                <span id="RenderizedText" [style]="'font-size: '+entry.Visualizator.FontSize+'vw; line-height: normal;'">
+                  {{entry.CurrentEntry.Translated == "" ? entry.CurrentEntry.Original : entry.CurrentEntry.Translated}}
+                </span>
+              </div>
+            </div>
+          </mat-card-title>
+      </mat-card>
+    </div>
     <mat-card id="Translator">
-
-      <!--<mat-card-title>
-        <div id="Visualization">
-          <img src="https://i.ya-webdesign.com/images/text-background-png-1.png" style="width:100%;height:auto">
-          <div id="Text">
-            <span style="top: 50px;left:50px" id="RenderizedText">
-              {{entry.Entry.Translated == "" ? entry.Entry.Original : entry.Entry.Translated}}
-            </span>
-          </div>
-        </div>
-      </mat-card-title>-->
+      <h2>Translation box</h2>
       <mat-card-content>
         <form class="example-form" [formGroup]="">
           <mat-form-field class="example-full-width">
             <mat-label>Original</mat-label>
-            <textarea autosize id="originalText" matInput readonly>{{entry.Entry.Original}}</textarea>
+            <textarea autosize id="originalText" matInput readonly>{{entry.CurrentEntry.Original}}</textarea>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>Translated</mat-label>
-            <textarea autosize matInput id="translatedText" #translatedText (keyup)="UpdateText(translatedText.value)" value="{{entry.Entry.Translated}}"></textarea>
+            <textarea autosize matInput id="translatedText" #translatedText (keyup)="UpdateText(translatedText.value)" value="{{entry.CurrentEntry.Translated}}"></textarea>
           </mat-form-field>
         </form>
 
@@ -44,15 +49,15 @@
           <!--<mat-slide-toggle>Need revision</mat-slide-toggle>-->
           <mat-chip-list>
             <span>Count:</span>
-            <mat-chip color="primary" selected id="charaCount">{{entry.Entry.Translated.length.toString()}}</mat-chip>
+            <mat-chip color="primary" selected id="charaCount">{{entry.CurrentEntry.Translated.length.toString()}}</mat-chip>
           </mat-chip-list>
         </mat-card-actions>
       </mat-card-content>
     </mat-card>
   </div>
   <div fxFlex="30" fxFlex.xs="100">
-
     <mat-card id="Index" *ngIf="entry">
+      <h2>Navigation</h2>
       <mat-paginator [length]="entry.Size"
                      [pageIndex]="entry.Index"
                      [pageSize]="1"
@@ -68,7 +73,23 @@
 
     <mat-card>
       <h2>Context</h2>
-      <h3 id="context">{{entry.Entry.Context}}</h3>
+      <h3 id="context">{{entry.CurrentEntry.Context}}</h3>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-content>
+        <mat-card-title>Previous Entry</mat-card-title>
+        <mat-card-subtitle>
+          <b>Original</b>: {{entry.PreviousEntry.Original}}<br />
+          <b>Translated</b>: {{entry.PreviousEntry.Translated}}
+        </mat-card-subtitle>
+        <hr>
+        <mat-card-title style="margin-top: 1vh;">Next Entry</mat-card-title>
+        <mat-card-subtitle>
+          <b>Original</b>:{{entry.NextEntry.Original}}<br />
+          <b>Translated</b>: {{entry.NextEntry.Translated}}
+        </mat-card-subtitle>
+      </mat-card-content>
     </mat-card>
   </div>
 
