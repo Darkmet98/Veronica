@@ -15,3 +15,12 @@ h1 {
 ::ng-deep .mat-progress-bar-buffer {
   background: #E4E8EB;
 }
+
+.card-container-right{
+  display: inline;
+  float: right;
+}
+
+.card-container-left{
+  display: inline;
+}

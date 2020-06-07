@@ -15,6 +15,7 @@ export class PoListComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private dataService: DataService) { }
 
   id: string;
+  projectName: string
   poLists: PoList[];
   private sub: any;
 
@@ -24,7 +25,8 @@ export class PoListComponent implements OnInit {
     });
 
     this.dataService.sendGetRequest("/api/entries/"+this.id).subscribe((data: any[])=> {
-      this.poLists = data;
+      this.poLists = data["Entries"];
+      this.projectName = data["ProjectName"];
     });
   }
 

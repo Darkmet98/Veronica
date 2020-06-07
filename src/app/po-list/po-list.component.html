@@ -1,9 +1,10 @@
-<h1>Components - {{id}}</h1>
+<h1>Components - {{projectName}}</h1>
 
 <div *ngFor="let component of poLists">
   <mat-card (click)="GoTo(component.Id)">
     <mat-card-content>
-      <mat-card-title>{{component.Name}}</mat-card-title>
+      <mat-card-title class="card-container-left">{{component.Name}}</mat-card-title>
+      <mat-card-title class="card-container-right">Translated: {{component.Translated}}%</mat-card-title>
       <mat-card-subtitle>Status: {{component.Status}}</mat-card-subtitle>
       <mat-card-actions>
         <mat-progress-bar mode="determinate" value='{{component.Translated}}' ></mat-progress-bar>
