@@ -1,11 +1,19 @@
 <h1>Projects</h1>
 
-<div *ngFor="let project of projects">
-  <mat-card (click)="GoTo(project.Id)">
-    <mat-card-header>
-      <div mat-card-avatar [ngStyle]="{'background-image': 'url('+dataService.REST_API_SERVER + '/images/gameIcon/'+project.Icon+')', 'background-size': 'cover'}"></div>
-      <mat-card-title>{{project.Name}}</mat-card-title>
-      <mat-card-subtitle>{{project.Description}}</mat-card-subtitle>
-    </mat-card-header>
-  </mat-card>
+<div fxFill fxLayout="column" fxLayoutAlign="space-between" *ngIf="projects">
+  <div *ngFor="let project of projects">
+    <mat-card (click)="GoTo(project.Id)">
+      <mat-card-header>
+        <div mat-card-avatar [ngStyle]="{'background-image': 'url('+dataService.REST_API_SERVER + '/images/gameIcon/'+project.Icon+')', 'background-size': 'cover'}"></div>
+        <mat-card-title>{{project.Name}}</mat-card-title>
+        <mat-card-subtitle>{{project.Description}}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+
+  <mat-paginator [length]="size"
+                 [pageSize]="1"
+                 [pageIndex]="page"
+                 (page)="getData($event)">
+  </mat-paginator>
 </div>
