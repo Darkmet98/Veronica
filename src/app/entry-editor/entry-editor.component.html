@@ -33,7 +33,15 @@
 
           <mat-form-field class="example-full-width">
             <mat-label>Translated</mat-label>
-            <textarea autosize matInput id="translatedText" #translatedText (keyup)="UpdateText(translatedText.value)" value="{{entry.CurrentEntry.Translated}}"></textarea>
+            <textarea autosize
+                      matInput
+                      id="translatedText"
+                      #translatedText
+                      (keyup)="UpdateText(translatedText.value)"
+                      (keyup.control.alt.s)="UpdateEntry(translatedText.value)"
+                      (keyup.control.alt.z)="PreviousEntry()"
+                      (keyup.control.alt.x)="NextEntry()"
+                      value="{{entry.CurrentEntry.Translated}}"></textarea>
           </mat-form-field>
         </form>
 
@@ -65,7 +73,7 @@
       </mat-paginator>
       <div class="container">
         <mat-form-field>
-          <input matInput #entryPosition placeholder="Go to entry..." pattern="^(\d)+$">
+          <input matInput #entryPosition placeholder="Go to entry..." pattern="^(\d)+$" (keyup.enter)="GoToEntry(entryPosition.value)">
         </mat-form-field>
         <button mat-stroked-button class="GoToButton" (click)="GoToEntry(entryPosition.value)">Go</button>
       </div>

@@ -20,6 +20,7 @@ export class EntryEditorComponent implements OnInit {
       // @ts-ignore
       this.entry = data;
       this.entryCount = this.entry.Index
+      this.entryLength = this.entry.Size;
     });
   }
 
@@ -27,6 +28,7 @@ export class EntryEditorComponent implements OnInit {
   idEntry: string;
   entryCount: number;
   entry: PoEntry;
+  entryLength :number;
 
   private sub: any;
   pageEvent: PageEvent;
@@ -60,9 +62,20 @@ export class EntryEditorComponent implements OnInit {
   }
 
   public NextEntry(){
-    this.entryCount++;
-    this.pageEvent.pageIndex++;
-    this.ChangeEntry();
+    if(this.pageEvent.pageIndex != this.entryLength){
+      this.entryCount++;
+      this.pageEvent.pageIndex++;
+      this.ChangeEntry();
+    }
+
+  }
+
+  public PreviousEntry(){
+    if(this.entryCount != 0){
+      this.entryCount--;
+      this.pageEvent.pageIndex--;
+      this.ChangeEntry();
+    }
   }
 
   public GoToEntry(position:string){
