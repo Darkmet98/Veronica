@@ -18,6 +18,8 @@ export class PoListComponent implements OnInit {
   projectName: string
   poLists: PoList[];
   private sub: any;
+  page : number = 0;
+  size : number = 0;
 
   ngOnInit(): void {
     this.sub = this.activatedRoute.params.subscribe(params => {
@@ -27,11 +29,21 @@ export class PoListComponent implements OnInit {
     this.dataService.sendGetRequest("/api/entries/"+this.id).subscribe((data: any[])=> {
       this.poLists = data["Entries"];
       this.projectName = data["ProjectName"];
+      this.size = data["NumberPages"];
     });
   }
 
 
   public GoTo(link) {
     this.router.navigateByUrl('/projects/' + this.id + '/' + link);
+  }
+
+  public getData(obj) {
+    const json = {
+      "page" : obj.pageIndex+1
+    }
+    this.dataService.sendPostRequest("/api/entries/"+this.id, json).subscribe((data: any[])=> {
+      this.poLists = data["Entries"];
+    });
   }
 }
