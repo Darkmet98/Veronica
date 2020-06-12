@@ -26,6 +26,7 @@ export class PoListComponent implements OnInit {
       this.id = params.id;
     });
 
+    //Get the components from Historie and write to the host
     this.dataService.sendGetRequest("/api/entries/"+this.id).subscribe((data: any[])=> {
       this.poLists = data["Entries"];
       this.projectName = data["ProjectName"];
@@ -34,10 +35,12 @@ export class PoListComponent implements OnInit {
   }
 
 
+  //Go to another component
   public GoTo(link) {
     this.router.navigateByUrl('/projects/' + this.id + '/' + link);
   }
 
+  //Get the new components paginated from Historie and write to the host
   public getData(obj) {
     const json = {
       "page" : obj.pageIndex+1

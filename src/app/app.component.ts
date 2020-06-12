@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {DataService} from "./data.service";
-import {catchError, map} from "rxjs/operators";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -23,17 +22,17 @@ export class AppComponent {
   public CheckLogin(){
     //Check if is logged
     this.dataService.sendGetRequest("/api/check").subscribe( (data: string)=> {
-        console.log(data)
-        if (data === "OK"){
+        if (data === "OK"){ //The token works with Historie
           this.isLogged = true;
           this.user = JSON.parse(localStorage.getItem("user")).Name
           this.router.navigateByUrl('/projects');
         }
-        else {
+        else { //The token doesn't work with Historie
           this.isLogged = false;
           this.router.navigateByUrl('/');
         }
       },
+      //The token has expired or Historie isn't avaliable
       error => {
         this.isLogged = false;
         this.router.navigateByUrl('/');
@@ -41,6 +40,7 @@ export class AppComponent {
     );
   }
 
+  //Logout from Veronica
   public Logout(){
     localStorage.removeItem("user");
     this.router.navigateByUrl('/');

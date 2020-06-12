@@ -21,6 +21,7 @@ export class ProjectsComponent implements OnInit {
       "page" : 1,
       id: JSON.parse(localStorage.getItem("user")).Id
     };
+    //Get the project list from Historie
     this.dataService.sendPostRequest("/api/projects", json).subscribe((data: any[])=> {
       this.projects = data["Projects"];
       this.size = data["NumberPages"];
@@ -31,6 +32,7 @@ export class ProjectsComponent implements OnInit {
     this.router.navigateByUrl('/projects/' + id);
   }
 
+  //Get the paginated project list from Historie
   public getData(obj) {
     const json = {
       "page" : obj.pageIndex+1,

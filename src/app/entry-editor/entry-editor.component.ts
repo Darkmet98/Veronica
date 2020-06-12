@@ -11,11 +11,14 @@ import {PageEvent} from "@angular/material/paginator";
 })
 export class EntryEditorComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute, public dataService: DataService) {
+
+    //Get the current id and EntryId
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.id = params["id"];
       this.idEntry = params["po"];
     });
 
+    //Send a request and get the entry data
     this.dataService.sendGetRequest("/api/entries/"+this.id+"/"+this.idEntry).subscribe((data: any[])=> {
       // @ts-ignore
       this.entry = data;
@@ -29,29 +32,33 @@ export class EntryEditorComponent implements OnInit {
   entryCount: number;
   entry: PoEntry;
   entryLength :number;
-
   private sub: any;
   pageEvent: PageEvent;
 
+  //Create new PageEvent
   ngOnInit(): void {
     this.pageEvent = new PageEvent();
   }
 
+  //Update realtime the visualizator and the chara count
   public UpdateText(translated:string) {
     document.getElementById('charaCount').innerText = translated.length.toString();
     document.getElementById('RenderizedText').innerText = translated;
   }
 
+  //Return to the project list
   public Return() {
     this.router.navigateByUrl('/projects/' + this.id);
   }
 
+  //Change the current entru from the PageEvent
   public ChangeIndex(event?:PageEvent){
     this.entryCount = event.pageIndex;
     this.ChangeEntry();
     return event;
   }
 
+  //Change the entry and obtain the new data
   private ChangeEntry(){
     this.dataService.sendGetRequest("/api/entries/"+this.id+"/"+this.idEntry+"/"+ this.entryCount).subscribe((data: any)=> {
       (<HTMLInputElement>document.getElementById('translatedText')).value = "";
@@ -61,6 +68,7 @@ export class EntryEditorComponent implements OnInit {
     });
   }
 
+  //Change the next entry from the keyboard shortcut
   public NextEntry(){
     if(this.pageEvent.pageIndex != this.entryLength){
       this.entryCount++;
@@ -69,7 +77,7 @@ export class EntryEditorComponent implements OnInit {
     }
 
   }
-
+  //Change the previous entry from the keyboard shortcut
   public PreviousEntry(){
     if(this.entryCount != 0){
       this.entryCount--;
@@ -78,6 +86,7 @@ export class EntryEditorComponent implements OnInit {
     }
   }
 
+  //Go to the specific entry from the input
   public GoToEntry(position:string){
     const pos = Number(position) - 1;
     if(isNaN(pos))
@@ -89,8 +98,8 @@ export class EntryEditorComponent implements OnInit {
     }
   }
 
+  //Update the current entry
   public UpdateEntry(translated:string){
-
     const entry = {
       translation : translated,
       position : this.entryCount,
