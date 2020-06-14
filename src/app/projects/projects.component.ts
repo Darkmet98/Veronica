@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Project} from '../interfaces/project';
 import {DataService} from "../data.service";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-projects',
@@ -14,7 +15,9 @@ export class ProjectsComponent implements OnInit {
   page : number = 0;
   size : number = 0;
 
-  constructor(public router: Router, public dataService: DataService) { }
+  constructor(public router: Router, public dataService: DataService, private appComponent : AppComponent) {
+    this.appComponent.CheckLogin();
+  }
 
   ngOnInit(): void {
     const json = {

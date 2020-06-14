@@ -19,13 +19,15 @@ export class AppComponent {
 
   }
 
-  public CheckLogin(){
+  public CheckLogin(isComponent=false) {
     //Check if is logged
     this.dataService.sendGetRequest("/api/check").subscribe( (data: string)=> {
         if (data === "OK"){ //The token works with Historie
           this.isLogged = true;
           this.user = JSON.parse(localStorage.getItem("user")).Name
-          this.router.navigateByUrl('/projects');
+
+          if (!isComponent)
+            this.router.navigateByUrl('/projects');
         }
         else { //The token doesn't work with Historie
           this.isLogged = false;

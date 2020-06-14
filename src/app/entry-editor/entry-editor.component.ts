@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PoEntry} from "../interfaces/poEntry";
 import {DataService} from "../data.service";
 import {PageEvent} from "@angular/material/paginator";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-entry-editor',
@@ -10,7 +11,8 @@ import {PageEvent} from "@angular/material/paginator";
   styleUrls: ['./entry-editor.component.css']
 })
 export class EntryEditorComponent implements OnInit {
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, public dataService: DataService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, public dataService: DataService, private appComponent : AppComponent) {
+    this.appComponent.CheckLogin(true);
 
     //Get the current id and EntryId
     this.sub = this.activatedRoute.params.subscribe(params => {

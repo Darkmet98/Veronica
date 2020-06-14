@@ -2,6 +2,7 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PoList} from '../interfaces/poList';
 import {DataService} from "../data.service";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-po-list',
@@ -12,7 +13,7 @@ import {DataService} from "../data.service";
 @Injectable()
 export class PoListComponent implements OnInit {
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private dataService: DataService) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private dataService: DataService, private appComponent : AppComponent) { }
 
   id: string;
   projectName: string
@@ -22,6 +23,8 @@ export class PoListComponent implements OnInit {
   size : number = 0;
 
   ngOnInit(): void {
+    this.appComponent.CheckLogin(true);
+
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.id = params.id;
     });
